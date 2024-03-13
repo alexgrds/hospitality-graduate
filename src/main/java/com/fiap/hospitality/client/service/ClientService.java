@@ -2,6 +2,7 @@ package com.fiap.hospitality.client.service;
 
 
 import com.fiap.hospitality.client.entity.Client;
+import com.fiap.hospitality.client.entity.dto.ClientRequest;
 import com.fiap.hospitality.client.repository.ClientRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -16,6 +17,11 @@ public class ClientService {
 
     public List<Client> findAll() {
         return repository.findAll();
+    }
+
+    public void save(ClientRequest clientRequest) {
+        Client client = new Client(clientRequest);
+        repository.save(client);
     }
 
 }

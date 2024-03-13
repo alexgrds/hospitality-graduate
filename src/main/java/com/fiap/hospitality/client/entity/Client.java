@@ -1,10 +1,8 @@
 package com.fiap.hospitality.client.entity;
 
+import com.fiap.hospitality.client.entity.dto.ClientRequest;
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.EqualsAndHashCode;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 @Data
 @Table(name = "clients")
@@ -12,7 +10,8 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 @EqualsAndHashCode(of = "id")
-public class Client  {
+@Builder
+public class Client {
 
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
@@ -25,5 +24,16 @@ public class Client  {
     private String birthPlaceAddress;
     private String phoneNumber;
     private String email;
+
+    public Client(ClientRequest clientRequest) {
+        this.birthPlace = clientRequest.birthPlace();
+        this.cpf = clientRequest.cpf();
+        this.passport = clientRequest.passport();
+        this.fullName = clientRequest.fullName();
+        this.birthDate = clientRequest.birthDate();
+        this.birthPlaceAddress = clientRequest.birthPlaceAddress();
+        this.phoneNumber = clientRequest.phoneNumber();
+        this.email = clientRequest.email();
+    }
 
 }
