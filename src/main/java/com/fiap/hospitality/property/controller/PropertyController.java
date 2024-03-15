@@ -1,10 +1,8 @@
 package com.fiap.hospitality.property.controller;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
 
-import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -53,16 +51,12 @@ public class PropertyController {
 
     @Operation(summary = "Get all the Properties", description = "Method for getting all the Properties")
     @ApiResponses(value = {
-            @ApiResponse(responseCode = "200", description = "SUCCESS - List of all Properties", content = @Content(array = @ArraySchema(schema = @Schema(implementation = Property.class)), mediaType = MediaType.APPLICATION_JSON_VALUE))
+            @ApiResponse(responseCode = "200", description = "SUCCESS - List of all Properties", content = @Content(array = @ArraySchema(schema = @Schema(implementation = PropertyAddressRoomResponse.class)), mediaType = MediaType.APPLICATION_JSON_VALUE))
     })
     @GetMapping
-    public ResponseEntity<List<Property>> getAll() {
-        List<Property> properties = new ArrayList<>();
-        properties.addAll(service.findAll());
-        if (properties.isEmpty())
-            return new ResponseEntity<>(HttpStatus.NO_CONTENT);
-
-        return new ResponseEntity<>(properties, HttpStatus.OK);
+    public ResponseEntity<List<PropertyAddressRoomResponse>> getAll() {
+        List<PropertyAddressRoomResponse> appliances = service.findAll();
+        return ResponseEntity.ok().body(appliances);
     }
 
     @Operation(summary = "Get Property by ID", description = "Method to get a property based on the ID")

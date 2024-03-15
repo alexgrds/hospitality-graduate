@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.fiap.hospitality.property.entity.Room;
+import com.fiap.hospitality.property.entity.dto.RoomBathroomResponse;
 import com.fiap.hospitality.property.entity.dto.RoomRequest;
 import com.fiap.hospitality.property.service.RoomService;
 
@@ -97,13 +98,13 @@ public class RoomController {
         return ResponseEntity.ok().body("Room Deleted with Success");
     }
 
-    @Operation(summary = "Include a Room", description = "Method to include a new Room")
+    @Operation(summary = "Include a Bathroom", description = "Method to include a new Bathroom")
     @ApiResponses(value = {
-            @ApiResponse(responseCode = "200", description = "SUCCESS - Rooms included with success", content = @Content(schema = @Schema(implementation = Room.class), mediaType = MediaType.APPLICATION_JSON_VALUE)),
+            @ApiResponse(responseCode = "200", description = "SUCCESS - Bathroom included with success", content = @Content(schema = @Schema(implementation = RoomBathroomResponse.class), mediaType = MediaType.APPLICATION_JSON_VALUE)),
     })
     @PostMapping("/addBathroom/{id}")
-    public ResponseEntity<Room> includeBathroom(@PathVariable String id, String bathId) {
-        Room property = service.includeBathroom(id, bathId);
+    public ResponseEntity<RoomBathroomResponse> includeBathroom(@PathVariable String id, String bathId) {
+        RoomBathroomResponse property = service.includeBathroom(id, bathId);
         return ResponseEntity.ok().body(property);
     }
 

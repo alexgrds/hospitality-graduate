@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 import com.fiap.hospitality.exception.NotFoundException;
 import com.fiap.hospitality.property.entity.Bathroom;
 import com.fiap.hospitality.property.entity.Room;
+import com.fiap.hospitality.property.entity.dto.RoomBathroomResponse;
 import com.fiap.hospitality.property.entity.dto.RoomRequest;
 import com.fiap.hospitality.property.repository.RoomRepository;
 
@@ -47,7 +48,7 @@ public class RoomService {
         repository.deleteById(id);
     }
 
-    public Room includeBathroom(String roomId, String bathroomId) {
+    public RoomBathroomResponse includeBathroom(String roomId, String bathroomId) {
 
         if (StringUtils.isBlank(bathroomId))
             throw new IllegalArgumentException("At least one Bathroom must be provided");
@@ -55,6 +56,7 @@ public class RoomService {
         Room room = findById(roomId);
         Bathroom bathroom = bathroomService.findById(bathroomId);
         room.setBathroom(bathroom);
-        return repository.save(room);
+        Room savedRoom = repository.save(room);
+        return RoomBathroomResponse.fromEntity(savedRoom);
     }
 }

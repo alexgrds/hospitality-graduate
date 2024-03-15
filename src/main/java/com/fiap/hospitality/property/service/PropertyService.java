@@ -3,8 +3,10 @@ package com.fiap.hospitality.property.service;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.fiap.hospitality.exception.NotFoundException;
 import com.fiap.hospitality.property.entity.Property;
@@ -23,8 +25,10 @@ public class PropertyService {
     private final PropertyRepository repository;
     private final RoomService roomService;
 
-    public List<Property> findAll() {
-        return repository.findAll();
+    @Transactional(readOnly = true)
+    public List<PropertyAddressRoomResponse> findAll() {
+        List<Property> properties = repository.findAll();
+        return properties.stream().map(PropertyAddressRoomResponse::fromEntity).collect(Collectors.toList());
     }
 
     public Property findById(String propertyId) {

@@ -14,10 +14,10 @@ public record PropertyAddressRoomResponse(
     String propertyName,
     String amenitiesDescription,
     Address address,
-    Set<RoomRequest> roomRequest) {
+    Set<RoomBathroomResponse> roomResponse) {
 
     public static PropertyAddressRoomResponse fromEntity(Property savedProperty) {
-        Set<RoomRequest> rooms = savedProperty.getRooms().stream().map(RoomRequest::fromEntity).collect(Collectors.toSet());
+        Set<RoomBathroomResponse> rooms = savedProperty.getRooms().stream().map(RoomBathroomResponse::fromEntity).collect(Collectors.toSet());
         return new PropertyAddressRoomResponse(savedProperty.getPropertyName(), savedProperty.getAmenitiesDescription(), savedProperty.getAddress(), rooms);
     }
 }
