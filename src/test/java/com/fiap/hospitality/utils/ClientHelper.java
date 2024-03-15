@@ -1,9 +1,9 @@
 package com.fiap.hospitality.utils;
 
 import com.fiap.hospitality.client.entity.Client;
+import com.fiap.hospitality.client.entity.dto.ClientRequest;
 
 import java.time.LocalDateTime;
-import java.util.UUID;
 
 public abstract class ClientHelper {
     public static Client createClients() {
@@ -19,5 +19,16 @@ public abstract class ClientHelper {
             .phoneNumber("11999999999")
             .birthDate("1990-01-01")
             .build();
-        }
+    }
+
+    public static ClientRequest createClientRequest() {
+        return new ClientRequest("São Paulo"
+            , "12345678901"
+            , "21312312"
+            , "Teste"
+            , "1990-01-01"
+            , "Rua teste"
+            , "11999999999"
+            , "alex@gmail.com");
+    }
 }
