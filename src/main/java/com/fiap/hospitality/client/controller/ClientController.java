@@ -3,8 +3,6 @@ package com.fiap.hospitality.client.controller;
 import com.fiap.hospitality.client.entity.Client;
 import com.fiap.hospitality.client.entity.dto.ClientRequest;
 import com.fiap.hospitality.client.service.ClientService;
-import com.fiap.hospitality.property.entity.Property;
-import com.fiap.hospitality.property.entity.dto.PropertyRequest;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.ArraySchema;
 import io.swagger.v3.oas.annotations.media.Content;

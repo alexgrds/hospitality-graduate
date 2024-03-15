@@ -53,4 +53,8 @@ public record ClientRequest(
         client.setEmail(email);
         return client;
     }
+
+    public String getCpf() {
+        return cpf;
+    }
 }

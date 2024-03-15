@@ -29,6 +29,12 @@ public class ClientService {
     }
 
     public void save(ClientRequest clientRequest) {
+
+        Client clientCpf = repository.findByCpf(clientRequest.getCpf());
+        if(clientCpf != null) {
+            throw new IllegalArgumentException("Client with CPF " + clientRequest.getCpf() + " already exists");
+        }
+
         Client client = new Client(clientRequest);
         repository.save(client);
     }

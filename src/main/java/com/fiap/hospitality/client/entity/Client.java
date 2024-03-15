@@ -35,5 +35,4 @@ public class Client {
         this.phoneNumber = clientRequest.phoneNumber();
         this.email = clientRequest.email();
     }
-
 }
