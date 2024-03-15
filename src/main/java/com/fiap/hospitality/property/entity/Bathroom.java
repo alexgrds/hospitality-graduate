@@ -1,5 +1,7 @@
 package com.fiap.hospitality.property.entity;
 
+import com.fiap.hospitality.property.entity.dto.BathroomRequest;
+
 import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;
 import jakarta.persistence.Enumerated;
@@ -23,8 +25,8 @@ import lombok.NoArgsConstructor;
 public class Bathroom {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    @GeneratedValue(strategy = GenerationType.UUID)
+    private String id;
 
     @NotNull
     @Enumerated(EnumType.STRING)
@@ -36,5 +38,9 @@ public class Bathroom {
     public Bathroom(BathTypeEnum bathType, String description) {
         this.bathType = bathType;
         this.description = description;
+    }
+
+    public BathroomRequest toDto() {
+        return BathroomRequest.fromEntity(this);
     }
 }

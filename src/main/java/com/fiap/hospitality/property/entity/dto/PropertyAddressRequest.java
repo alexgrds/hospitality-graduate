@@ -7,7 +7,11 @@ import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 
 @Schema(title = "PropertyRequest", description = "Object that represents a client request")
-public record PropertyRequest(
+public record PropertyAddressRequest(
+
+    @NotBlank(message = "propertyName is mandatory")
+    @Schema(description = "Property Name", example = "Ibis hortolândia")
+    String propertyName,
 
     @NotBlank(message = "amenitiesDescription is mandatory")
     @Schema(description = "properties's amenities", example = "1 x Piscina Adulto, aquecida e coberta /n 1 x Piscina Adulto, não aquecida em área aberta")
