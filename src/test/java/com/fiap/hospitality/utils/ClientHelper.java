@@ -23,11 +23,11 @@ public abstract class ClientHelper {
     public static ClientRequest createClientRequest() {
         return new ClientRequest("São Paulo"
             , "12345678901"
-            , "21312312"
+            , "123456"
             , "Teste"
             , "1990-01-01"
             , "Rua teste"
             , "11999999999"
-            , "alex@gmail.com");
+            , "teste@gmail.com");
     }
 }

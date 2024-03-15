@@ -1,7 +1,6 @@
-package com.fiap.hospitality.room.controller;
+package com.fiap.hospitality.property.controller;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.fiap.hospitality.property.controller.RoomController;
 import com.fiap.hospitality.property.entity.Room;
 import com.fiap.hospitality.property.entity.dto.RoomRequest;
 import com.fiap.hospitality.property.service.RoomService;
