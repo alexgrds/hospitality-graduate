@@ -1,9 +1,9 @@
 package com.fiap.hospitality.booking.service;
 
 import java.math.BigDecimal;
-import java.time.LocalDate;
 import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 import org.springframework.stereotype.Service;
@@ -18,6 +18,7 @@ import com.fiap.hospitality.booking.repository.BookingRepository;
 import com.fiap.hospitality.client.entity.Client;
 import com.fiap.hospitality.client.service.ClientService;
 import com.fiap.hospitality.exception.NotFoundException;
+import com.fiap.hospitality.exception.RoomAlreadyBookedException;
 import com.fiap.hospitality.property.entity.Room;
 import com.fiap.hospitality.property.entity.dto.RoomBathroomResponse;
 import com.fiap.hospitality.property.service.RoomService;
@@ -45,15 +46,22 @@ public class BookingService {
                 .orElseThrow(() -> new NotFoundException("Could not find any Booking given id: " + bookingId));
     }
 
-    public BookingResponse bookingRoom(@Valid BookingRequest request) {
-        getAllBookedRooms(request.getCheckin(), request.getCheckout());
+    public BookingResponse bookingRoom(@Valid BookingRequest request) throws RoomAlreadyBookedException {
+        checkRoomAvailability(request);
         Client client = clientService.findById(request.getClientId());
         Booking booking = registerBooking(client, request);
         return new BookingResponse(booking);
     }
 
-     private Booking registerBooking(Client client, @Valid BookingRequest request) {
-        Booking booking = new Booking(request.getCheckin(),request.getCheckout(), client.getId());
+    private void checkRoomAvailability(BookingRequest request) throws RoomAlreadyBookedException {
+        List<String> availableRoomsIds = availableRoomRepository.findAvailableRoomsBetweenCheckinAndCheckout(request.getCheckin(), request.getCheckout());
+        if (!Collections.disjoint(availableRoomsIds, request.getRoomIds())) {
+            throw new RoomAlreadyBookedException();
+        }
+    }
+
+    private Booking registerBooking(Client client, @Valid BookingRequest request) {
+        Booking booking = new Booking(request.getCheckin(), request.getCheckout(), client.getId());
         long numberOfNights = ChronoUnit.DAYS.between(request.getCheckin(), request.getCheckout());
         List<RoomBathroomResponse> rooms = getRoomsById(request.getRoomIds());
         addRoomsToBooking(booking, rooms, numberOfNights);
@@ -72,10 +80,6 @@ public class BookingService {
         });
 
         return bookedRooms;
-    }
-
-    private List<String> getAllBookedRooms(LocalDate checkin, LocalDate checkout) {
-        return availableRoomRepository.findAvailableRoomsBetweenCheckinAndCheckout(checkin, checkout);
     }
 
     private void addRoomsToBooking(Booking booking, List<RoomBathroomResponse> rooms, long numberOfNights) {

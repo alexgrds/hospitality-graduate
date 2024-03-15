@@ -1,14 +1,14 @@
 package com.fiap.hospitality.utils;
 
-import com.fiap.hospitality.option.entity.dto.OptionRequest;
+import java.math.BigDecimal;
+import java.util.Set;
+import java.util.UUID;
+
 import com.fiap.hospitality.property.entity.Property;
 import com.fiap.hospitality.property.entity.RoomTypeEnum;
 import com.fiap.hospitality.property.entity.dto.PropertyAddressRequest;
 import com.fiap.hospitality.property.entity.dto.PropertyAddressRoomResponse;
 import com.fiap.hospitality.property.entity.dto.RoomBathroomResponse;
-
-import java.math.BigDecimal;
-import java.util.Set;
 
 public abstract class PropertyHelper {
     public static Property createPropertys() {
@@ -32,7 +32,7 @@ public abstract class PropertyHelper {
             , Set.of(createRoomBathroomResponse()));
     }
     public static RoomBathroomResponse createRoomBathroomResponse() {
-        return new RoomBathroomResponse(RoomTypeEnum.valueOf("STANDARD_SIMPLE")
+        return new RoomBathroomResponse(UUID.randomUUID().toString(), RoomTypeEnum.valueOf("STANDARD_SIMPLE")
             , "Room"
             , BathroomHelper.createBathrooms()
             , 2

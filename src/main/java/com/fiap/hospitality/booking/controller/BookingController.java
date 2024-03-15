@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.fiap.hospitality.booking.entity.dto.BookingRequest;
 import com.fiap.hospitality.booking.entity.dto.BookingResponse;
 import com.fiap.hospitality.booking.service.BookingService;
+import com.fiap.hospitality.exception.RoomAlreadyBookedException;
 
 import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.ExampleObject;
@@ -39,7 +40,7 @@ public class BookingController {
     private final BookingService service;
 
     @PostMapping
-    public ResponseEntity<BookingResponse> booking(@RequestBody @Valid BookingRequest request) {
+    public ResponseEntity<BookingResponse> booking(@RequestBody @Valid BookingRequest request) throws RoomAlreadyBookedException {
         return ResponseEntity.ok(service.bookingRoom(request));
     }
 
