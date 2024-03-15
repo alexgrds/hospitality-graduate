@@ -10,15 +10,15 @@ services:
     networks:
       - my_network
   
-  hospitality:
-    build:
-      context: .
-      dockerfile: Dockerfile
-    container_name: hospitality
-    ports:
-      - "8080:8080"
-    networks:
-      - my_network
+#   hospitality:
+#     build:
+#       context: .
+#       dockerfile: Dockerfile
+#     container_name: hospitality
+#     ports:
+#       - "8080:8080"
+#     networks:
+#       - my_network
 
 networks:
   my_network:

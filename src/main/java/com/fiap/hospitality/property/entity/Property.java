@@ -3,7 +3,7 @@ package com.fiap.hospitality.property.entity;
 import java.util.HashSet;
 import java.util.Set;
 
-import com.fiap.hospitality.property.entity.dto.PropertyRequest;
+import com.fiap.hospitality.property.entity.dto.PropertyAddressRequest;
 
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
@@ -33,9 +33,10 @@ public class Property {
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
     private String id;
+    private String propertyName;
     private String amenitiesDescription;
 
-    @OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @OneToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     private Address address;
 
     @ManyToMany(fetch = FetchType.EAGER, cascade = {CascadeType.PERSIST, CascadeType.REMOVE})
@@ -46,10 +47,10 @@ public class Property {
     )
     private Set<Room> rooms = new HashSet<>();
 
-
-
-    public Property(PropertyRequest propertyRequest) {
-        
+    public Property(PropertyAddressRequest propertyRequest) {
+        this.propertyName = propertyRequest.propertyName();
+        this.amenitiesDescription = propertyRequest.amenitiesDescription();
+        this.address = propertyRequest.address().toDomain();
     }
 
 }
