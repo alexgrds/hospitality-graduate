@@ -11,6 +11,7 @@ import io.swagger.v3.oas.annotations.media.Schema;
 @Schema(title = "PropertyRequest", description = "Object that represents a client request")
 public record RoomBathroomResponse(
 
+        String roomId,
         RoomTypeEnum roomType,
         String description,
         Bathroom bathroom,
@@ -18,7 +19,7 @@ public record RoomBathroomResponse(
         BigDecimal pricePerNight) {
 
     public static RoomBathroomResponse fromEntity(Room savedRoom) {
-        return new RoomBathroomResponse(savedRoom.getRoomType(), savedRoom.getDescription(), savedRoom.getBathroom(),
+        return new RoomBathroomResponse(savedRoom.getId(),savedRoom.getRoomType(), savedRoom.getDescription(), savedRoom.getBathroom(),
                 savedRoom.getTotalGuests(), savedRoom.getPricePerNight());
     }
 }

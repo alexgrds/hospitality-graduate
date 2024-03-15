@@ -1,6 +1,6 @@
 spring:
     application:
-        name: Ecommerce
+        name: Hospitality
     banner.location: static/banner.txt
     datasource:
         url: jdbc:postgresql://localhost:5432/postgres
