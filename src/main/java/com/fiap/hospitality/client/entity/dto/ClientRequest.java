@@ -1,5 +1,6 @@
 package com.fiap.hospitality.client.entity.dto;
 
+import com.fiap.hospitality.client.entity.Client;
 import io.swagger.v3.oas.annotations.media.Schema;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Size;
@@ -40,4 +41,16 @@ public record ClientRequest(
     @NotBlank(message = "email is mandatory")
     @Schema(description = "Client's email", example = "josefulano@gmail.com")
     String email) {
+
+    public Client returnEntityUpdated(Client client) {
+        client.setBirthPlace(birthPlace);
+        client.setBirthDate(birthDate);
+        client.setCpf(cpf);
+        client.setPassport(passport);
+        client.setFullName(fullName);
+        client.setBirthPlaceAddress(birthPlaceAddress);
+        client.setPhoneNumber(phoneNumber);
+        client.setEmail(email);
+        return client;
+    }
 }

@@ -3,6 +3,8 @@ package com.fiap.hospitality.client.controller;
 import com.fiap.hospitality.client.entity.Client;
 import com.fiap.hospitality.client.entity.dto.ClientRequest;
 import com.fiap.hospitality.client.service.ClientService;
+import com.fiap.hospitality.property.entity.Property;
+import com.fiap.hospitality.property.entity.dto.PropertyRequest;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.ArraySchema;
 import io.swagger.v3.oas.annotations.media.Content;
@@ -54,11 +56,34 @@ public class ClientController {
         return new ResponseEntity<>(clients, HttpStatus.OK);
     }
 
+    @Operation(summary = "Get Client by ID", description = "Method to get a client based on the ID")
+    @ApiResponses(value = {
+        @ApiResponse(responseCode = "200", description = "SUCCESS", content = @Content(schema = @Schema(implementation = Client.class), mediaType = MediaType.APPLICATION_JSON_VALUE)),
+    })
+    @GetMapping("/{id}")
+    public ResponseEntity<Client> getById(@PathVariable("id") String id) {
+        Client client = service.findById(id);
+        return ResponseEntity.ok().body(client);
+    }
+
     @Operation(summary = "Save", description = "Method to register a new Client")
     @PostMapping
     public ResponseEntity<String> save(@RequestBody @Valid ClientRequest clientRequest) {
         service.save(clientRequest);
         return new ResponseEntity<>("Client registered with success", HttpStatus.CREATED);
+    }
+
+    @Operation(summary = "Update a Client", description = "Method to update a Client")
+    @PutMapping("/{id}")
+    public ResponseEntity<Client> updateClient(@PathVariable String id, @Valid @RequestBody ClientRequest request) {
+        return ResponseEntity.ok(service.update(id, request));
+    }
+
+    @Operation(summary = "Delete a Client", description = "Method to delete a Client")
+    @DeleteMapping("/{id}")
+    public ResponseEntity<String> deleteClient(@PathVariable String id) {
+        service.deleteById(id);
+        return ResponseEntity.ok().body("Client Deleted with Success");
     }
 
 }
