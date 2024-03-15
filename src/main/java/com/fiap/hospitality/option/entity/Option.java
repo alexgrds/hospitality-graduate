@@ -4,6 +4,8 @@ import com.fiap.hospitality.option.entity.dto.OptionRequest;
 import jakarta.persistence.*;
 import lombok.*;
 
+import java.math.BigDecimal;
+
 @Data
 @Table(name = "options")
 @Entity(name = "options")
@@ -21,7 +23,7 @@ public class Option {
     private OptionEnum option;
 
     private String name;
-    private String value;
+    private BigDecimal value;
 
     public Option(OptionRequest optionRequest) {
         this.option = optionRequest.getOption();

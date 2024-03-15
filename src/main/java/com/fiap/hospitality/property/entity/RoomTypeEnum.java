@@ -16,4 +16,8 @@ public enum RoomTypeEnum {
 
     String name;
 
+    private RoomTypeEnum(String name) {
+        this.name = name;
+    }
+
 }

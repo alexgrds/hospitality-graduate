@@ -7,7 +7,6 @@ import java.time.LocalDateTime;
 
 public abstract class ClientHelper {
     public static Client createClients() {
-        var timestamp = LocalDateTime.now();
         return Client.builder()
             .id("123")
             .cpf("12345678901")

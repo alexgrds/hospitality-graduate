@@ -12,4 +12,8 @@ public enum BathTypeEnum {
 
     String name;
 
+    private BathTypeEnum(String name) {
+        this.name = name;
+    }
+
 }

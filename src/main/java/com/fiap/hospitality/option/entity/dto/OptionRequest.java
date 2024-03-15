@@ -6,6 +6,8 @@ import io.swagger.v3.oas.annotations.media.Schema;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 
+import java.math.BigDecimal;
+
 @Schema(title = "OptionRequest", description = "Object that represents a option request")
 public record OptionRequest(
 
@@ -16,9 +18,9 @@ public record OptionRequest(
     @Schema(description = "option's name", example = "Breakfast")
     String name,
 
-    @NotBlank(message = "option's value is mandatory")
-    @Schema(description = "option's value", example = "4,50")
-    String value) {
+    @NotNull(message = "option's value is mandatory")
+    @Schema(description = "option's value", example = "4.50")
+    BigDecimal value) {
 
     public Option returnEntityUpdated(Option option) {
         option.setName(name);
