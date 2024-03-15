@@ -19,7 +19,6 @@ import org.springframework.web.bind.annotation.RestController;
 import com.fiap.hospitality.property.entity.Property;
 import com.fiap.hospitality.property.entity.dto.PropertyAddressRequest;
 import com.fiap.hospitality.property.entity.dto.PropertyAddressRoomResponse;
-import com.fiap.hospitality.property.entity.dto.RoomRequest;
 import com.fiap.hospitality.property.service.PropertyService;
 
 import io.swagger.v3.oas.annotations.Operation;
@@ -105,7 +104,7 @@ public class PropertyController {
             @ApiResponse(responseCode = "200", description = "SUCCESS - Rooms included with success", content = @Content(schema = @Schema(implementation = PropertyAddressRoomResponse.class), mediaType = MediaType.APPLICATION_JSON_VALUE)),
     })
     @PostMapping("/addRoom/{id}")
-    public ResponseEntity<PropertyAddressRoomResponse> includeRooms(@PathVariable String id, @Valid @RequestBody Set<RoomRequest> roomRequest) {
+    public ResponseEntity<PropertyAddressRoomResponse> includeRooms(@PathVariable String id, @Valid @RequestBody Set<String> roomRequest) {
         PropertyAddressRoomResponse property = service.includeRooms(id, roomRequest);
         return ResponseEntity.ok().body(property);
     }

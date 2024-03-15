@@ -40,6 +40,11 @@ public class Bathroom {
         this.description = description;
     }
 
+    public Bathroom(BathroomRequest bath) {
+        this.bathType = bath.bathType();
+        this.description = bath.description();
+    }
+
     public BathroomRequest toDto() {
         return BathroomRequest.fromEntity(this);
     }

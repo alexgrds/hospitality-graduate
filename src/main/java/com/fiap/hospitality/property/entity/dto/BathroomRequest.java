@@ -25,5 +25,11 @@ public record BathroomRequest(
     public static BathroomRequest fromEntity (Bathroom bathroom) {
         return new BathroomRequest(bathroom.getBathType(), bathroom.getDescription());
     }
+
+    public Bathroom returnEntityUpdated(Bathroom bath) {
+        bath.setBathType(bathType);
+        bath.setDescription(description);
+        return bath;
+    }
     
 }

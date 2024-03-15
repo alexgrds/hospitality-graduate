@@ -1,19 +1,20 @@
 package com.fiap.hospitality.client.service;
 
 
+import java.util.List;
+
+import org.springframework.stereotype.Service;
+
 import com.fiap.hospitality.client.entity.Client;
 import com.fiap.hospitality.client.entity.dto.ClientRequest;
 import com.fiap.hospitality.client.repository.ClientRepository;
 import com.fiap.hospitality.exception.NotFoundException;
-import com.fiap.hospitality.property.entity.Property;
-import com.fiap.hospitality.property.entity.dto.PropertyRequest;
-import lombok.RequiredArgsConstructor;
-import org.springframework.stereotype.Service;
 
-import java.util.List;
+import lombok.RequiredArgsConstructor;
 
 @Service
 @RequiredArgsConstructor
+@SuppressWarnings("null")
 public class ClientService {
 
     private final ClientRepository repository;

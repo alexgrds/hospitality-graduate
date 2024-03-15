@@ -1,17 +1,20 @@
 package com.fiap.hospitality.option.service;
 
 
+import java.util.List;
+
+import org.springframework.stereotype.Service;
+
 import com.fiap.hospitality.exception.NotFoundException;
 import com.fiap.hospitality.option.entity.Option;
 import com.fiap.hospitality.option.entity.dto.OptionRequest;
 import com.fiap.hospitality.option.repository.OptionRepository;
-import lombok.RequiredArgsConstructor;
-import org.springframework.stereotype.Service;
 
-import java.util.List;
+import lombok.RequiredArgsConstructor;
 
 @Service
 @RequiredArgsConstructor
+@SuppressWarnings("null")
 public class OptionService {
 
     private final OptionRepository repository;

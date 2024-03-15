@@ -61,7 +61,6 @@ public class Room {
     public Room(RoomRequest rooms) {
         this.roomType = rooms.roomType();
         this.description = rooms.description();
-        this.bathroom = rooms.bathroom().toDomain();
         this.totalGuests = rooms.totalGuests();
         this.pricePerNight = rooms.pricePerNight();
     }

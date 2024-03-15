@@ -19,23 +19,27 @@ public record RoomRequest(
     @NotBlank(message = "description is mandatory")
     @Schema(description = "Describe how is the room", example = "1xSofá - 2xPoltronas - 1xFrigobar")
     String description,
-
-    @NotNull(message = "bathroom is mandatory")
-    BathroomRequest bathroom,
     
-    @NotBlank(message = "totalGuests is mandatory")
     @Schema(description = "How many guests the room can afford?", example = "2")
     @Positive
     int totalGuests,
 
-    @NotBlank(message = "pricePerNight is mandatory")
+    @NotNull(message = "pricePerNight is mandatory")
     @Schema(description = "How much is it per night?", example = "1000")
     @Positive
     BigDecimal pricePerNight
 ) {
 
     public static RoomRequest fromEntity(Room room) {
-        return new RoomRequest(room.getRoomType(), room.getDescription(), room.getBathroom().toDto(), room.getTotalGuests(), room.getPricePerNight());
+        return new RoomRequest(room.getRoomType(), room.getDescription(), room.getTotalGuests(), room.getPricePerNight());
+    }
+
+    public Room returnEntityUpdated(Room room) {
+        room.setRoomType(roomType);
+        room.setDescription(description);
+        room.setTotalGuests(totalGuests);
+        room.setPricePerNight(pricePerNight);
+        return room;
     }
 
     
