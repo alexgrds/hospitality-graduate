@@ -18,15 +18,9 @@ Welcome to **Hospitality **! An innovative project that combines the powerful te
 
 
 
-## Goals/Tasks
-
-| Task                                                         | Status   |
-| ------------------------------------------------------------ | -------- |
-
-
-
-
 ## Challenges
+
+* Time to finish with a lot dependencies between the entities!
 
 ## Working with Postgres
 
