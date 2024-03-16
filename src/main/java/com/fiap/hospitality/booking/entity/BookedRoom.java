@@ -25,7 +25,7 @@ import lombok.NoArgsConstructor;
 public class BookedRoom {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.UUID)
     private String id;
 
     @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL, optional = true)
