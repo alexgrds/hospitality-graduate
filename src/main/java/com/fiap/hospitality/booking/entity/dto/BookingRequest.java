@@ -31,18 +31,4 @@ public class BookingRequest {
     @Past(message = "check out should not be set to the paste")
     @Schema(description = "When the client will make the check in", example = "2023-03-18")
     private LocalDate checkout;
-
-    // public LocalDate getCheckin() throws CheckingInvalidException {
-    //     if (this.checkin.isAfter(this.checkout)){
-    //         throw new CheckingInvalidException();
-    //     }
-    //     return checkin;
-    // }
-
-    // public LocalDate getCheckout() throws CheckingInvalidException {
-    //     if (this.checkout.isBefore(this.checkin)){
-    //         throw new CheckingInvalidException();
-    //     }
-    //     return checkout;
-    // }
 }

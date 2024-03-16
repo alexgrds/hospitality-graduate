@@ -12,8 +12,10 @@ import com.fiap.hospitality.booking.entity.dto.BookingResponse;
 import com.fiap.hospitality.booking.service.BookingService;
 import com.fiap.hospitality.exception.RoomAlreadyBookedException;
 
+import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.ExampleObject;
+import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import io.swagger.v3.oas.annotations.tags.Tag;
@@ -39,6 +41,10 @@ public class BookingController {
 
     private final BookingService service;
 
+    @Operation(summary = "Book a room", description = "Method to book a room")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "SUCCESS - Booking successfully done", content = @Content(schema = @Schema(implementation = BookingRequest.class), mediaType = MediaType.APPLICATION_JSON_VALUE)),
+    })
     @PostMapping
     public ResponseEntity<BookingResponse> booking(@RequestBody @Valid BookingRequest request) throws RoomAlreadyBookedException {
         return ResponseEntity.ok(service.bookingRoom(request));
